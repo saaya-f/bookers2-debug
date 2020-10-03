@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
 	before_action :authenticate_user!
-	before_action :ensure_correct_user, only: [:edit, :update]
+	before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 	# 投稿に紐づいているユーザーと現在ログインしているユーザーが異なるかどうかを比べるメソッドをensure_correct_userとして定義
 
   def show
@@ -43,7 +43,7 @@ class BooksController < ApplicationController
   def destroy
     @book = Book.find(params[:id])
     @book.destroy
-    redirect_to books_path
+    redirect_to books_path, notice: "successfully delete book!"
   end
 
   private
